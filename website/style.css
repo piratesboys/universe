@@ -174,3 +174,115 @@ header p {
 .credits section {
     margin-bottom: 30px;
 }
+
+/* Responsive design - téléphone */
+
+@media screen and (max-width: 768px) {
+
+    body {
+        padding: 10px;
+        background-attachment: scroll;
+    }
+
+    /* Navbar */
+    .navbar {
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .navbar a {
+        padding: 7px 10px;
+        font-size: 14px;
+    }
+
+    /* Titre */
+    header h1 {
+        font-size: 2em;
+        padding-top: 130px;
+    }
+
+    header p {
+        font-size: 14px;
+        padding: 0 10px;
+    }
+
+    /* Cartes */
+    .card {
+        padding: 20px;
+        margin: 20px 10px;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .card h2 {
+        font-size: 1.3em;
+    }
+
+    .card p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    /* Boutons */
+    .button {
+        padding: 9px 16px;
+        font-size: 14px;
+    }
+
+    /* Page crédits */
+    .credits {
+        margin: 100px 10px 30px;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .credits h1 {
+        font-size: 28px;
+    }
+
+    .credits h2 {
+        font-size: 22px;
+    }
+
+    .credits p {
+        font-size: 14px;
+    }
+}
+
+/* Très petits écrans */
+@media screen and (max-width: 480px) {
+
+    .navbar {
+        gap: 5px;
+        padding: 8px;
+    }
+
+    .navbar a {
+        font-size: 12px;
+        padding: 6px 8px;
+    }
+
+    header h1 {
+        font-size: 1.7em;
+        padding-top: 150px;
+    }
+
+    .card {
+        padding: 16px;
+        margin: 15px 5px;
+    }
+
+    .credits {
+        padding: 15px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .credits h1 {
+        font-size: 24px;
+    }
+
+    .credits h2 {
+        font-size: 19px;
+    }
+}
