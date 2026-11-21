@@ -2,8 +2,7 @@ name: Deploy Universe to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -37,9 +36,18 @@ jobs:
           mkdir -p _site/images
           cp -R images/. _site/images/
 
-      - name: Upload website
-        uses: actions/upload-pages-artifact@v3
+      - name: Verify website files
+        run: |
+          echo "Checking website..."
+          ls -la _site
+          echo "Checking images..."
+          ls -la _site/images
+          test -f _site/index.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
         with:
+          name: github-pages
           path: _site
 
       - name: Deploy website
