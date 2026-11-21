@@ -1,8 +1,10 @@
-name: Deploy Universe to GitHub Pages
+name: Deploy Universe Website
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+
   workflow_dispatch:
 
 permissions:
@@ -11,11 +13,43 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: github-pages
   cancel-in-progress: false
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prepare website
+        run: |
+          set -e
+
+          mkdir -p _site
+          mkdir -p _site/images
+
+          cp -R website/. _site/
+          cp -R images/. _site/images/
+
+          echo "Website files:"
+          ls -la _site
+
+          echo "Image files:"
+          ls -la _site/images
+
+          test -f _site/index.html
+          test -d _site/images
+
+      - name: Upload website artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
   deploy:
+    needs: build
     runs-on: ubuntu-latest
 
     environment:
@@ -23,33 +57,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Prepare website
-        run: |
-          mkdir -p _site
-          cp -R website/. _site/
-          mkdir -p _site/images
-          cp -R images/. _site/images/
-
-      - name: Verify website files
-        run: |
-          echo "Checking website..."
-          ls -la _site
-          echo "Checking images..."
-          ls -la _site/images
-          test -f _site/index.html
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          name: github-pages
-          path: _site
-
-      - name: Deploy website
+      - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v4
