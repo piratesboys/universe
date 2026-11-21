@@ -15,4 +15,9 @@ If you don't know how to create a pull request, here's what to do:
 - Then click on **New Pull Requests**
 - And then follow the steps provided
 
+## IMPORTANT
+**Never** use images without copyright; use **images** with **licences** that permit **reuse**.
+
+If you’re looking for some ideas, you could have a look at **[the issues](https://github.com/piratesboys/universe/issues)**
+
 If you are using AI, please read the **[AI usage policy](https://github.com/piratesboys/universe/blob/main/AI_POLICY.md)**
