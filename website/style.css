@@ -1,6 +1,6 @@
 body {
     background-color: #0b0d1a;
-    background-image: url(images/background.jpeg);
+    background-image: url(/universe/images/background.jpeg);
     background-size: cover;                    
     background-position: center;               
     background-attachment: fixed;              
