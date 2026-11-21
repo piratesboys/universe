@@ -1,8 +1,9 @@
-name: Deploy static content to GitHub Pages
+name: Deploy Universe to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -11,18 +12,19 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: false
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Pages
@@ -30,14 +32,16 @@ jobs:
 
       - name: Prepare website
         run: |
-          mkdir -p website/images
-          cp -r images/* website/images/
+          mkdir -p _site
+          cp -R website/. _site/
+          mkdir -p _site/images
+          cp -R images/. _site/images/
 
-      - name: Upload artifact
+      - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './website'
+          path: _site
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy website
         id: deployment
         uses: actions/deploy-pages@v5
